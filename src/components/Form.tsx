@@ -8,7 +8,7 @@ type FormProps = {
 
 const Form = ({ inputValue, setInputValue, handleSubmit }: FormProps) => {
   return (
-    <form className="input-group mb-3" onSubmit={handleSubmit}>
+    <form className="input-group mb-3 " onSubmit={handleSubmit}>
       <input
         type="text"
         className="form-control"

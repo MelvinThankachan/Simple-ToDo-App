@@ -10,28 +10,25 @@ export type items = {
 const App = () => {
   const [items, setItems] = useState<items[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
-  const [itemsList, setItemsList] = useState<string[]>([]);
-  const [length, setLength] = useState(0);
 
   const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
     let currentValue = inputValue.trim();
-    if (currentValue !== "" && !itemsList.includes(currentValue)) {
+    if (currentValue !== "") {
       setItems((prevItems) => [
         ...prevItems,
         { title: currentValue, id: crypto.randomUUID() },
       ]);
-      setItemsList((prevItems) => [...prevItems, currentValue]);
-      setLength(length + 1);
       setInputValue("");
     }
   };
 
+  let itemsLength = items.length;
 
   return (
     <div
-      style={{ width: "500px" }}
-      className="d-flex align-items-start flex-column mx-auto"
+      style={{ width: "500px", height: "100%"}}
+      className="d-flex align-items-start flex-column mt-5 mx-auto my-auto"
     >
       <h1 className="mx-auto">Todo</h1>
       <Form
@@ -39,14 +36,8 @@ const App = () => {
         setInputValue={setInputValue}
         handleSubmit={handleSubmit}
       ></Form>
-      {/* <p>{length}</p> */}
-      <List
-        items={items}
-        setItems={setItems}
-        setItemsList={setItemsList}
-        setLength={setLength}
-        length={length}
-      ></List>
+      <p className="mx-auto">Task Remainig: {itemsLength}</p>
+      <List items={items} setItems={setItems} length={length}></List>
     </div>
   );
 };

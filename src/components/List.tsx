@@ -4,21 +4,17 @@ import ListItem from "./ListItem";
 type ListProps = {
   items: items[];
   setItems: React.Dispatch<React.SetStateAction<items[]>>;
-  setItemsList: React.Dispatch<React.SetStateAction<string[]>>;
-  setLength: React.Dispatch<React.SetStateAction<number>>;
   length: number;
 };
 
-const List = ({ items, setItems, setLength, length }: ListProps) => {
+const List = ({ items, setItems }: ListProps) => {
   const handleDelete = (id: string) => {
     console.log("Delete");
     setItems((prevItems) => prevItems.filter((data) => data.id !== id));
-    // setItemsList((prevList) => prevList.filter())
-    setLength(length - 1);
   };
 
   return (
-    <ul style={{ width: "100%" }} className="list-group">
+    <ul style={{ width: "100%", maxHeight: "50vh", overflowY: "auto" }} className="list-group">
       {items.map((item) => (
         <ListItem
           handleDelete={handleDelete}
